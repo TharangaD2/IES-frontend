@@ -134,9 +134,7 @@ const categoryColors: Record<string, string> = {
     "Multiple Systems": "#F5A623",
 };
 
-/* ---------------------------
-   COMPONENT
---------------------------- */
+
 export default function Projects() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [filter, setFilter] = useState<string>("all");
