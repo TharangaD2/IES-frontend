@@ -119,7 +119,7 @@ const HeroSection: React.FC = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.6 }}
-                                    className="p-8 ml-auto max-w-md"
+                                    className="p-8 ml-auto max-w-md pt-80"
                                 >
                                     <p className="text-white text-lg mb-6">
                                         {heroSlides[currentSlide].description}

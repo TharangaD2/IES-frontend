@@ -121,7 +121,7 @@ const AboutSection: React.FC = () => {
                         </p>
 
                         <Link href={createPageUrl('About')}>
-                            <button className="bg-[#E30613] hover:bg-[#C00510] text-white px-8 py-4 rounded-full font-medium transition-colors">
+                            <button className="bg-[#0084CA] hover:bg-[#006BA6] text-white px-8 py-4 rounded-full font-medium flex items-center gap-2 transition-colors">
                                 Learn More About Us
                             </button>
                         </Link>

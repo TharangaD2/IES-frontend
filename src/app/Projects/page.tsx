@@ -153,12 +153,21 @@ export default function Projects() {
         <div className="min-h-screen bg-gray-50">
             <Navbar />
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 bg-[#0A1628] overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0" style={{
-                        backgroundImage: `linear-gradient(#00A3E0 1px, transparent 1px), linear-gradient(90deg, #00A3E0 1px, transparent 1px)`,
-                        backgroundSize: '50px 50px'
-                    }} />
+            <section className="relative pt-32 pb-20 bg-[#0A1628] overflow-hidden min-h-[60vh] flex items-center">
+                {/* Video Background */}
+                <div className="absolute inset-0 z-0">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                    >
+                        <source src="/vedio/projects.mov" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    {/* Dark Overlay for legibility */}
+                    <div className="absolute inset-0 bg-[#0A1628]/70" />
                 </div>
 
                 <div className="container mx-auto px-6 lg:px-12 relative">
