@@ -591,6 +591,7 @@ export default function Products() {
                     )
                 }
             </AnimatePresence >
+            <Footer />
         </div >
     );
 }
