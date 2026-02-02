@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
                                 backgroundImage: `url(${heroSlides[currentSlide].image})`
                             }}
                         />
-                        <div className="absolute inset-0 bg-black/30" />
+                        <div className="absolute inset-0 bg-black/60" />
                     </motion.div>
                 </AnimatePresence>
 
@@ -98,14 +98,14 @@ const HeroSection: React.FC = () => {
                                     transition={{ duration: 0.6 }}
                                     className="text-white"
                                 >
-                                    <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4">
+                                    <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4 bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
                                         {heroSlides[currentSlide].title}
                                         <br />
-                                        <span className="text-[#0084CA]">
+                                        <span>
                                             {heroSlides[currentSlide].subtitle}
                                         </span>
                                     </h1>
-                                    <p className="text-xl md:text-2xl font-light mb-8 uppercase tracking-wide">
+                                    <p className="text-xl md:text-2xl font-light mb-8 uppercase tracking-wide bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
                                         {heroSlides[currentSlide].tagline}
                                     </p>
                                 </motion.div>
@@ -119,9 +119,9 @@ const HeroSection: React.FC = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.6 }}
-                                    className="bg-white rounded-lg p-8 shadow-2xl ml-auto max-w-md"
+                                    className="p-8 ml-auto max-w-md"
                                 >
-                                    <p className="text-gray-700 text-lg mb-6">
+                                    <p className="text-white text-lg mb-6">
                                         {heroSlides[currentSlide].description}
                                     </p>
 
@@ -132,13 +132,7 @@ const HeroSection: React.FC = () => {
                                         </button>
                                     </Link>
 
-                                    <div className="mt-6 pt-6 border-t">
-                                        <img
-                                            src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=300&h=200&q=80&fit=crop"
-                                            alt="Product"
-                                            className="w-full h-32 object-cover rounded"
-                                        />
-                                    </div>
+
                                 </motion.div>
                             </AnimatePresence>
                         </div>

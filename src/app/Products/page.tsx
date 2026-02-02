@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Wrench, Droplets, Search, Filter, ChevronDown, ArrowRight, Check } from 'lucide-react';
+import { Zap, Wrench, Droplets, Search, Filter, ChevronDown, ArrowRight, Check, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +10,9 @@ import Link from 'next/link';
 import { createPageUrl } from '@/utils';
 import Navbar from '@/components/ui/navBar';
 import Footer from '@/components/ui/footer';
+import { Textarea } from '@/components/ui/textArea';
+import { Label } from '@/components/ui/label';
+import { Send, CheckCircle2, MessageSquare } from 'lucide-react';
 
 type Category = {
     id: string;
@@ -157,9 +160,39 @@ const products: Product[] = [
 ];
 
 export default function Products() {
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [activeCategory, setActiveCategory] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+    const formRef = React.useRef<HTMLDivElement>(null);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+    });
+
+    const scrollToForm = () => {
+        setSelectedProduct(null);
+        setTimeout(() => {
+            formRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({ name: '', email: '', phone: '', message: '' });
+        }, 3000);
+    };
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -264,9 +297,10 @@ export default function Products() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.3 }}
-                                    className="relative group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+                                    className="relative group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer"
                                     onMouseEnter={() => setHoveredProduct(product.id)}
                                     onMouseLeave={() => setHoveredProduct(null)}
+                                    onClick={() => setSelectedProduct(product)}
                                 >
                                     {/* Image */}
                                     <div className="relative h-48 overflow-hidden bg-gray-100">
@@ -342,11 +376,221 @@ export default function Products() {
                                 Clear filters
                             </Button>
                         </div>
-
                     )}
                 </div>
             </section>
-            <Footer />
-        </div>
+
+            {/* INQUIRY FORM SECTION */}
+            <section ref={formRef} className="py-20 bg-white">
+                <div className="container mx-auto px-6 lg:px-12">
+                    <div className="max-w-2xl mx-auto">
+                        <div className="text-center mb-10">
+                            <span className="inline-block px-4 py-1.5 rounded-full bg-[#00A3E0]/10 text-[#00A3E0] text-sm font-medium mb-4">
+                                Get in Touch
+                            </span>
+                            <h2 className="text-3xl font-bold text-[#0A1628] mb-3">
+                                Interested in our products?
+                            </h2>
+                            <p className="text-gray-500 text-sm">
+                                Fill out the form below and we'll get back to you with a quote and more information.
+                            </p>
+                        </div>
+
+                        <div className="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xl shadow-gray-200/50">
+                            {isSubmitted ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="text-center py-12"
+                                >
+                                    <div className="w-20 h-20 rounded-full bg-[#00D4AA]/20 flex items-center justify-center mx-auto mb-6">
+                                        <CheckCircle2 className="w-10 h-10 text-[#00D4AA]" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-[#0A1628] mb-2">Thank You!</h3>
+                                    <p className="text-gray-500">Your inquiry has been sent. We'll be in touch soon.</p>
+                                </motion.div>
+                            ) : (
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="name">Full Name *</Label>
+                                        <Input
+                                            id="name"
+                                            required
+                                            placeholder="John Doe"
+                                            className="rounded-xl bg-white"
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="email">Email Address *</Label>
+                                        <Input
+                                            id="email"
+                                            type="email"
+                                            required
+                                            placeholder="john@example.com"
+                                            className="rounded-xl bg-white"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="phone">Phone Number *</Label>
+                                        <Input
+                                            id="phone"
+                                            required
+                                            placeholder="+94 XX XXX XXXX"
+                                            className="rounded-xl bg-white"
+                                            value={formData.phone}
+                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="message">Message *</Label>
+                                        <Textarea
+                                            id="message"
+                                            required
+                                            placeholder="Tell us which products you are interested in..."
+                                            className="rounded-xl bg-white min-h-[120px]"
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <Button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-xl py-6 text-lg font-medium"
+                                    >
+                                        {isSubmitting ? (
+                                            <span className="flex items-center gap-2">
+                                                <motion.div
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                                                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                                                />
+                                                Sending...
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2">
+                                                <Send className="w-5 h-5" />
+                                                Send Inquiry
+                                            </span>
+                                        )}
+                                    </Button>
+                                </form>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            {/* PRODUCT MODAL */}
+            <AnimatePresence>
+                {
+                    selectedProduct && (
+                        <motion.div
+                            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+                            onClick={() => setSelectedProduct(null)}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <motion.div
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row"
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                            >
+                                {/* Image Section */}
+                                <div className="relative w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
+                                    <img
+                                        src={selectedProduct.image}
+                                        alt={selectedProduct.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/10" />
+
+                                    <button
+                                        onClick={() => setSelectedProduct(null)}
+                                        className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white hover:bg-white/30 transition-colors md:hidden"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="flex-1 p-8 overflow-y-auto bg-white relative">
+                                    <button
+                                        onClick={() => setSelectedProduct(null)}
+                                        className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hidden md:flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+
+                                    <div className="mb-6">
+                                        <Badge
+                                            className="mb-3"
+                                            style={{
+                                                backgroundColor: `${getCategoryColor(selectedProduct.category)}20`,
+                                                color: getCategoryColor(selectedProduct.category)
+                                            }}
+                                        >
+                                            {categories.find(c => c.id === selectedProduct.category)?.name}
+                                        </Badge>
+                                        <h2 className="text-2xl md:text-3xl font-bold text-[#0A1628] mb-2">
+                                            {selectedProduct.name}
+                                        </h2>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            {selectedProduct.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="mb-8">
+                                        <h4 className="font-bold text-[#0A1628] mb-4 flex items-center gap-2">
+                                            <Zap className="w-4 h-4 text-[#00A3E0]" />
+                                            Key Features
+                                        </h4>
+                                        <div className="grid gap-3">
+                                            {selectedProduct.features.map((feature, i) => (
+                                                <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                                                    <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                                        <Check className="w-3 h-3 text-green-600" />
+                                                    </div>
+                                                    <span className="text-gray-700 text-sm font-medium">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-6 border-t border-gray-100">
+                                        <div className="flex flex-col gap-3">
+                                            <p className="text-sm text-gray-400 text-center mb-2">
+                                                Interested in this product?
+                                            </p>
+                                            <Button
+                                                onClick={() => {
+                                                    setFormData({ ...formData, message: `I'm interested in ${selectedProduct.name}...` });
+                                                    scrollToForm();
+                                                }}
+                                                className="w-full bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-xl py-6 text-lg font-medium shadow-lg shadow-[#00A3E0]/20 hover:shadow-[#00A3E0]/40 transition-all"
+                                            >
+                                                Inquire Now
+                                                <ArrowRight className="ml-2 w-5 h-5" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence >
+        </div >
     );
 }

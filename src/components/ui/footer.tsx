@@ -181,32 +181,6 @@ const Footer: React.FC = () => {
                     </motion.div>
                 </div>
 
-                {/* Newsletter */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="border-t border-white/10 pt-12 mb-12"
-                >
-                    <div className="max-w-xl mx-auto text-center">
-                        <h4 className="text-white font-bold text-xl mb-4">
-                            Stay Updated
-                        </h4>
-                        <p className="text-gray-400 mb-6">
-                            Subscribe to our newsletter for the latest products and updates.
-                        </p>
-                        <div className="flex gap-3">
-                            <Input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 rounded-full"
-                            />
-                            <Button className="bg-[#0084CA] hover:bg-[#006BA6] rounded-full px-6">
-                                Subscribe
-                            </Button>
-                        </div>
-                    </div>
-                </motion.div>
 
                 {/* Copyright */}
                 <div className="border-t border-white/10 pt-8">
