@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
                             <img
                                 src="/img/IES-LOGO.png"
                                 alt="IES Logo"
-                                className="h-12 w-auto"
+                                className="h-15 w-auto"
                             />
                             <div>
                                 <div className={`font-bold text-lg transition-colors ${isScrolled ? 'text-[#0084CA]' : 'text-white'}`}>

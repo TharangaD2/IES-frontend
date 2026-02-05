@@ -4,6 +4,7 @@ import ProductsSection from './ui/productSection';
 import AboutSection from './ui/aboutSection';
 import ProjectsSection from './ui/projectSection';
 import ServicesSection from './ui/serviceSection';
+import Partners from './ui/partners';
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
             <ProductsSection />
             <AboutSection />
             <ProjectsSection />
+            <Partners />
 
 
         </div>

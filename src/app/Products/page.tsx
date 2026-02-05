@@ -13,6 +13,7 @@ import Footer from '@/components/ui/footer';
 import { Textarea } from '@/components/ui/textArea';
 import { Label } from '@/components/ui/label';
 import { Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import Partners from '@/components/ui/partners';
 
 type Category = {
     id: string;
@@ -232,7 +233,7 @@ export default function Products() {
                         playsInline
                         className="w-full h-full object-cover"
                     >
-                        <source src="/vedio/product.mp4" type="video/mp4" />
+                        <source src="/vedio/mechanical.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     {/* Dark Overlay for legibility */}
@@ -604,6 +605,7 @@ export default function Products() {
                     )
                 }
             </AnimatePresence >
+            <Partners />
 
             <Footer />
         </div >
