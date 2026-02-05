@@ -161,10 +161,10 @@ const products: Product[] = [
 
 export default function Products() {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [inquireProduct, setInquireProduct] = useState<Product | null>(null);
     const [activeCategory, setActiveCategory] = useState<string>('all');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-    const formRef = React.useRef<HTMLDivElement>(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -174,11 +174,12 @@ export default function Products() {
         message: ''
     });
 
-    const scrollToForm = () => {
-        setSelectedProduct(null);
-        setTimeout(() => {
-            formRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+    const openInquireModal = (product: Product) => {
+        setInquireProduct(product);
+        setFormData({
+            ...formData,
+            message: `I'm interested in ${product.name}...`
+        });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -191,6 +192,8 @@ export default function Products() {
         setTimeout(() => {
             setIsSubmitted(false);
             setFormData({ name: '', email: '', phone: '', message: '' });
+            setInquireProduct(null);
+            setSelectedProduct(null);
         }, 3000);
     };
 
@@ -319,11 +322,6 @@ export default function Products() {
                                             alt={product.name}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                            <Button variant="secondary" className="rounded-full bg-white text-[#0A1628] hover:bg-[#00A3E0] hover:text-white transition-colors">
-                                                View Details
-                                            </Button>
-                                        </div>
                                     </div>
 
                                     {/* Content */}
@@ -350,9 +348,16 @@ export default function Products() {
                                             <span className="text-xs font-medium text-gray-400">
                                                 ID: {product.id.toString().padStart(4, '0')}
                                             </span>
-                                            <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#00A3E0] transition-colors">
-                                                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-                                            </div>
+                                            <Button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    openInquireModal(product);
+                                                }}
+                                                size="sm"
+                                                className="bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-full px-4 text-xs"
+                                            >
+                                                Inquire
+                                            </Button>
                                         </div>
                                     </div>
 
@@ -385,119 +390,10 @@ export default function Products() {
                 </div>
             </section>
 
-            {/* INQUIRY FORM SECTION */}
-            <section ref={formRef} className="py-20 bg-white">
-                <div className="container mx-auto px-6 lg:px-12">
-                    <div className="max-w-2xl mx-auto">
-                        <div className="text-center mb-10">
-                            <span className="inline-block px-4 py-1.5 rounded-full bg-[#00A3E0]/10 text-[#00A3E0] text-sm font-medium mb-4">
-                                Get in Touch
-                            </span>
-                            <h2 className="text-3xl font-bold text-[#0A1628] mb-3">
-                                Interested in our products?
-                            </h2>
-                            <p className="text-gray-500 text-sm">
-                                Fill out the form below and we'll get back to you with a quote and more information.
-                            </p>
-                        </div>
-
-                        <div className="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xl shadow-gray-200/50">
-                            {isSubmitted ? (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="text-center py-12"
-                                >
-                                    <div className="w-20 h-20 rounded-full bg-[#00D4AA]/20 flex items-center justify-center mx-auto mb-6">
-                                        <CheckCircle2 className="w-10 h-10 text-[#00D4AA]" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-[#0A1628] mb-2">Thank You!</h3>
-                                    <p className="text-gray-500">Your inquiry has been sent. We'll be in touch soon.</p>
-                                </motion.div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="name">Full Name *</Label>
-                                        <Input
-                                            id="name"
-                                            required
-                                            placeholder="John Doe"
-                                            className="rounded-xl bg-white"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="email">Email Address *</Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            required
-                                            placeholder="john@example.com"
-                                            className="rounded-xl bg-white"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="phone">Phone Number *</Label>
-                                        <Input
-                                            id="phone"
-                                            required
-                                            placeholder="+94 XX XXX XXXX"
-                                            className="rounded-xl bg-white"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="message">Message *</Label>
-                                        <Textarea
-                                            id="message"
-                                            required
-                                            placeholder="Tell us which products you are interested in..."
-                                            className="rounded-xl bg-white min-h-[120px]"
-                                            value={formData.message}
-                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                        />
-                                    </div>
-
-                                    <Button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-xl py-6 text-lg font-medium"
-                                    >
-                                        {isSubmitting ? (
-                                            <span className="flex items-center gap-2">
-                                                <motion.div
-                                                    animate={{ rotate: 360 }}
-                                                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                                                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                                                />
-                                                Sending...
-                                            </span>
-                                        ) : (
-                                            <span className="flex items-center gap-2">
-                                                <Send className="w-5 h-5" />
-                                                Send Inquiry
-                                            </span>
-                                        )}
-                                    </Button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
             {/* PRODUCT MODAL */}
             <AnimatePresence>
                 {
-                    selectedProduct && (
+                    selectedProduct && !inquireProduct && (
                         <motion.div
                             className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
                             onClick={() => setSelectedProduct(null)}
@@ -580,8 +476,7 @@ export default function Products() {
                                             </p>
                                             <Button
                                                 onClick={() => {
-                                                    setFormData({ ...formData, message: `I'm interested in ${selectedProduct.name}...` });
-                                                    scrollToForm();
+                                                    openInquireModal(selectedProduct);
                                                 }}
                                                 className="w-full bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-xl py-6 text-lg font-medium shadow-lg shadow-[#00A3E0]/20 hover:shadow-[#00A3E0]/40 transition-all"
                                             >
@@ -596,6 +491,120 @@ export default function Products() {
                     )
                 }
             </AnimatePresence >
+
+            {/* INQUIRE MODAL */}
+            <AnimatePresence>
+                {
+                    inquireProduct && (
+                        <motion.div
+                            className="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4"
+                            onClick={() => setInquireProduct(null)}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <motion.div
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl"
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                            >
+                                <div className="p-8">
+                                    <div className="flex items-center justify-between mb-8">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-12 h-12 rounded-xl bg-[#00A3E0]/10 flex items-center justify-center">
+                                                <MessageSquare className="w-6 h-6 text-[#00A3E0]" />
+                                            </div>
+                                            <div>
+                                                <h2 className="text-2xl font-bold text-[#0A1628]">Product Inquiry</h2>
+                                                <p className="text-gray-500 text-sm">{inquireProduct.name}</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setInquireProduct(null)}
+                                            className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                                        >
+                                            <X className="w-5 h-5" />
+                                        </button>
+                                    </div>
+
+                                    {isSubmitted ? (
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            className="text-center py-12"
+                                        >
+                                            <div className="w-20 h-20 rounded-full bg-[#00D4AA]/20 flex items-center justify-center mx-auto mb-6">
+                                                <CheckCircle2 className="w-10 h-10 text-[#00D4AA]" />
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-[#0A1628] mb-2">Thank You!</h3>
+                                            <p className="text-gray-500">Your inquiry has been sent successfully.</p>
+                                        </motion.div>
+                                    ) : (
+                                        <form onSubmit={handleSubmit} className="space-y-5">
+                                            <div className="space-y-1.5">
+                                                <Label htmlFor="modal-name" className="text-sm">Full Name *</Label>
+                                                <Input
+                                                    id="modal-name"
+                                                    required
+                                                    placeholder="John Doe"
+                                                    className="rounded-xl"
+                                                    value={formData.name}
+                                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="space-y-1.5">
+                                                    <Label htmlFor="modal-email" className="text-sm">Email *</Label>
+                                                    <Input
+                                                        id="modal-email"
+                                                        type="email"
+                                                        required
+                                                        placeholder="john@example.com"
+                                                        className="rounded-xl"
+                                                        value={formData.email}
+                                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                    />
+                                                </div>
+                                                <div className="space-y-1.5">
+                                                    <Label htmlFor="modal-phone" className="text-sm">Phone *</Label>
+                                                    <Input
+                                                        id="modal-phone"
+                                                        required
+                                                        placeholder="+94 XX XXX XXXX"
+                                                        className="rounded-xl"
+                                                        value={formData.phone}
+                                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-1.5">
+                                                <Label htmlFor="modal-message" className="text-sm">Message *</Label>
+                                                <Textarea
+                                                    id="modal-message"
+                                                    required
+                                                    className="rounded-xl min-h-[100px]"
+                                                    value={formData.message}
+                                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                                />
+                                            </div>
+                                            <Button
+                                                type="submit"
+                                                disabled={isSubmitting}
+                                                className="w-full bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-xl py-6 font-medium mt-2"
+                                            >
+                                                {isSubmitting ? "Sending..." : "Send Inquiry"}
+                                            </Button>
+                                        </form>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence >
+
             <Footer />
         </div >
     );

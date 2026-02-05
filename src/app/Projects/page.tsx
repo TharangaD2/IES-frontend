@@ -161,7 +161,7 @@ export default function Projects() {
                         playsInline
                         className="w-full h-full object-cover"
                     >
-                        <source src="/vedio/projects.mov" type="video/mp4" />
+                        <source src="/vedio/Projects.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                     {/* Dark Overlay for legibility */}

@@ -84,22 +84,21 @@ export default function About() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-24 bg-[#0A1628] overflow-hidden">
-                <div className="absolute inset-0">
-                    <div
-                        className="absolute inset-0 opacity-10"
-                        style={{
-                            backgroundImage: `linear-gradient(#00A3E0 1px, transparent 1px), 
-                linear-gradient(90deg, #00A3E0 1px, transparent 1px)`,
-                            backgroundSize: '50px 50px'
-                        }}
-                    />
-
-                    <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                        className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] border border-[#00A3E0]/10 rounded-full"
-                    />
+            <section className="relative pt-32 pb-24 bg-[#0A1628] overflow-hidden min-h-[60vh] flex items-center">
+                {/* Video Background */}
+                <div className="absolute inset-0 z-0">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                    >
+                        <source src="/vedio/Newproject.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    {/* Dark Overlay for legibility */}
+                    <div className="absolute inset-0 bg-[#0A1628]/70" />
                 </div>
 
                 <div className="container mx-auto px-6 lg:px-12 relative">
