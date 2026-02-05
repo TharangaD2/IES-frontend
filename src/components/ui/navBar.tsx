@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             <motion.nav
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white'
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
                     }`}
             >
                 <div className="container mx-auto px-6 lg:px-12">
@@ -58,15 +58,15 @@ const Navbar: React.FC = () => {
                             className="flex items-center gap-3"
                         >
                             <img
-                                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/697989b225d4410887cb7c45/9cc7469a9_logo2.png"
+                                src="/img/IES-LOGO.png"
                                 alt="IES Logo"
                                 className="h-12 w-auto"
                             />
                             <div>
-                                <div className="font-bold text-[#0084CA] text-lg">
+                                <div className={`font-bold text-lg transition-colors ${isScrolled ? 'text-[#0084CA]' : 'text-white'}`}>
                                     Infinity
                                 </div>
-                                <div className="text-xs text-gray-600">
+                                <div className={`text-xs transition-colors ${isScrolled ? 'text-gray-600' : 'text-white/80'}`}>
                                     Engineering Solutions (Pvt) Ltd.
                                 </div>
                             </div>
@@ -78,9 +78,9 @@ const Navbar: React.FC = () => {
                                 <Link
                                     key={link.path}
                                     href={createPageUrl(link.path)}
-                                    className={`px-4 py-2 text-sm font-medium transition-colors ${isActive(link.path)
-                                        ? 'text-[#0084CA]'
-                                        : 'text-gray-700 hover:text-[#0084CA]'
+                                    className={`px-4 py-2 text-sm font-medium transition-all ${isActive(link.path)
+                                        ? (isScrolled ? 'text-[#0084CA]' : 'text-white border-b-2 border-white')
+                                        : (isScrolled ? 'text-gray-700 hover:text-[#0084CA]' : 'text-white/90 hover:text-white')
                                         }`}
                                 >
                                     {link.name}
@@ -88,13 +88,12 @@ const Navbar: React.FC = () => {
                             ))}
                         </div>
 
-                        {/* Right side */}
                         <div className="hidden lg:flex items-center gap-2">
                             <Link
                                 href={createPageUrl('Contact')}
-                                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-[#0084CA] transition-colors"
+                                className={`flex items-center gap-2 text-sm font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:text-[#0084CA]' : 'text-white/90 hover:text-white'}`}
                             >
-                                <MapPin className="w-4 h-4" />
+                                <MapPin className={`w-4 h-4 transition-colors ${isScrolled ? 'text-[#0084CA]' : 'text-white'}`} />
                                 Find Local Partners
                             </Link>
                         </div>
@@ -104,7 +103,7 @@ const Navbar: React.FC = () => {
                             onClick={() =>
                                 setIsMobileMenuOpen((prev) => !prev)
                             }
-                            className="lg:hidden p-2 text-gray-700"
+                            className={`lg:hidden p-2 transition-colors ${isScrolled ? 'text-gray-700' : 'text-white'}`}
                             aria-label="Toggle menu"
                         >
                             {isMobileMenuOpen ? (

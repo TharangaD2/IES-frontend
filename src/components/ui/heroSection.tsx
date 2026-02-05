@@ -12,6 +12,7 @@ type HeroSlide = {
     tagline: string
     description: string
     image: string
+    video?: string
     cta: string
 }
 
@@ -24,6 +25,7 @@ const heroSlides: HeroSlide[] = [
             '100+ commercial and industrial projects trust Infinity Engineering Solutions.',
         image:
             'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&q=80',
+        video: '/vedio/hero2.mp4',
         cta: 'Meet our products'
     },
     {
@@ -34,6 +36,7 @@ const heroSlides: HeroSlide[] = [
             'Delivering cutting-edge fire safety and detection systems nationwide.',
         image:
             'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80',
+        video: '/vedio/hero3.mp4',
         cta: 'View our projects'
     },
     {
@@ -44,6 +47,7 @@ const heroSlides: HeroSlide[] = [
             'Certified products and professional installation services across Sri Lanka.',
         image:
             'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1920&q=80',
+        video: '/vedio/Hero1.mp4',
         cta: 'Contact us today'
     }
 ]
@@ -60,9 +64,9 @@ const HeroSection: React.FC = () => {
     }, [])
 
     return (
-        <section className="relative mt-20 overflow-hidden bg-white">
+        <section className="relative mt-0 overflow-hidden bg-white">
             {/* Main Hero Container */}
-            <div className="relative h-[600px] md:h-[700px]">
+            <div className="relative h-screen">
                 {/* Background Images */}
                 <AnimatePresence mode="wait">
                     <motion.div
@@ -73,12 +77,24 @@ const HeroSection: React.FC = () => {
                         transition={{ duration: 1 }}
                         className="absolute inset-0"
                     >
-                        <div
-                            className="absolute inset-0 bg-cover bg-center"
-                            style={{
-                                backgroundImage: `url(${heroSlides[currentSlide].image})`
-                            }}
-                        />
+                        {heroSlides[currentSlide].video ? (
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover"
+                            >
+                                <source src={heroSlides[currentSlide].video} type="video/mp4" />
+                            </video>
+                        ) : (
+                            <div
+                                className="absolute inset-0 bg-cover bg-center"
+                                style={{
+                                    backgroundImage: `url(${heroSlides[currentSlide].image})`
+                                }}
+                            />
+                        )}
                         <div className="absolute inset-0 bg-black/60" />
                     </motion.div>
                 </AnimatePresence>

@@ -84,7 +84,7 @@ export default function About() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-24 bg-[#0A1628] overflow-hidden min-h-[60vh] flex items-center">
+            <section className="relative pt-32 pb-24 bg-[#0A1628] overflow-hidden min-h-screen flex items-center">
                 {/* Video Background */}
                 <div className="absolute inset-0 z-0">
                     <video

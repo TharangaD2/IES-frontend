@@ -42,18 +42,18 @@ const socialIcons: LucideIcon[] = [Facebook, Linkedin, Instagram]
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-gray-900 pt-20 pb-8">
+        <footer className="bg-gray-900 pt-12 pb-6">
             <div className="container mx-auto px-6 lg:px-12">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
                     {/* Company Info */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="flex items-center gap-3 mb-6">
+                        <div className="flex items-center gap-3 mb-4">
                             <img
-                                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/697989b225d4410887cb7c45/9cc7469a9_logo2.png"
+                                src="/img/IES-LOGO.png"
                                 alt="IES Logo"
                                 className="h-10 w-auto"
                             />
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
                             </div>
                         </div>
 
-                        <p className="text-gray-400 mb-6 leading-relaxed">
+                        <p className="text-gray-400 mb-4 leading-relaxed">
                             Providing quality engineering products and customized solutions
                             for contractors, institutions, and commercial properties across
                             Sri Lanka.
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
                     >
-                        <h4 className="text-white font-bold text-lg mb-6">
+                        <h4 className="text-white font-bold text-lg mb-4">
                             Quick Links
                         </h4>
                         <ul className="space-y-3">
@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        <h4 className="text-white font-bold text-lg mb-6">
+                        <h4 className="text-white font-bold text-lg mb-4">
                             Our Products
                         </h4>
                         <ul className="space-y-3">
@@ -142,7 +142,7 @@ const Footer: React.FC = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
                     >
-                        <h4 className="text-white font-bold text-lg mb-6">
+                        <h4 className="text-white font-bold text-lg mb-4">
                             Contact Us
                         </h4>
                         <ul className="space-y-4">
@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
 
 
                 {/* Copyright */}
-                <div className="border-t border-white/10 pt-8">
+                <div className="border-t border-white/10 pt-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-gray-500 text-sm">
                             © {new Date().getFullYear()} Infinity Engineering Solutions (Pvt)
