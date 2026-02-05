@@ -112,16 +112,16 @@ const HeroSection: React.FC = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 30 }}
                                     transition={{ duration: 0.6 }}
-                                    className="text-white"
+                                    className="text-white text-center lg:text-left"
                                 >
-                                    <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-4 bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
                                         {heroSlides[currentSlide].title}
                                         <br />
                                         <span>
                                             {heroSlides[currentSlide].subtitle}
                                         </span>
                                     </h1>
-                                    <p className="text-xl md:text-2xl font-light mb-8 uppercase tracking-wide bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
+                                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mb-8 uppercase tracking-wide bg-gradient-to-r from-[#00D4AA] to-[#0084CA] bg-clip-text text-transparent">
                                         {heroSlides[currentSlide].tagline}
                                     </p>
                                 </motion.div>
@@ -135,16 +135,16 @@ const HeroSection: React.FC = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.6 }}
-                                    className="p-8 ml-auto max-w-md pt-80"
+                                    className="p-6 sm:p-8 mx-auto lg:ml-auto max-w-md pt-8 lg:pt-80 text-center lg:text-left"
                                 >
-                                    <p className="text-white text-lg mb-6">
+                                    <p className="text-white text-sm sm:text-base lg:text-lg mb-6">
                                         {heroSlides[currentSlide].description}
                                     </p>
 
                                     <Link href={createPageUrl('Products')}>
-                                        <button className="bg-[#0084CA] hover:bg-[#006BA6] text-white px-8 py-4 rounded-full font-medium flex items-center gap-2 transition-colors">
+                                        <button className="bg-[#0084CA] hover:bg-[#006BA6] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium flex items-center gap-2 transition-colors mx-auto lg:mx-0 text-sm sm:text-base">
                                             {heroSlides[currentSlide].cta}
-                                            <ArrowRight className="w-5 h-5" />
+                                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                                         </button>
                                     </Link>
 
