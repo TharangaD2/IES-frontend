@@ -171,7 +171,7 @@ export default function Contact() {
             {/* Contact Info Cards */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-6 lg:px-12">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 -mt-24 relative z-10">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 -mt-24 relative z-10">
                         {contactInfo.map((info, index) => {
                             const Icon = info.icon;
 

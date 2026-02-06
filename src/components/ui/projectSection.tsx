@@ -84,7 +84,7 @@ const ProjectsSection: React.FC = () => {
                 </motion.div>
 
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {projects.slice(0, 3).map((project, index) => (
                         <motion.div
                             key={project.id}

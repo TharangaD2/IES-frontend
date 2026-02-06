@@ -212,7 +212,7 @@ export default function Projects() {
             {/* Projects Grid */}
             <section className="py-16">
                 <div className="container mx-auto px-6 lg:px-12">
-                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <motion.div layout className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
                         <AnimatePresence mode="popLayout">
                             {filteredProjects.map((project, index) => (
                                 <motion.div

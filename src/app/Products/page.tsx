@@ -297,7 +297,7 @@ export default function Products() {
             <section className="py-12 bg-gray-50 min-h-[600px]">
                 <div className="container mx-auto px-6 lg:px-12">
                     <AnimatePresence mode="popLayout">
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
                             {filteredProducts.map((product) => (
                                 <motion.div
                                     key={product.id}
@@ -326,12 +326,12 @@ export default function Products() {
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-5">
-                                        <div className="mb-3">
-                                            <h3 className="font-bold text-gray-900 group-hover:text-[#00A3E0] transition-colors mb-1">
+                                    <div className="p-3 lg:p-5">
+                                        <div className="mb-2 lg:mb-3">
+                                            <h3 className="font-bold text-gray-900 group-hover:text-[#00A3E0] transition-colors mb-1 text-sm lg:text-base">
                                                 {product.name}
                                             </h3>
-                                            <p className="text-sm text-gray-500 line-clamp-2">
+                                            <p className="text-xs lg:text-sm text-gray-500 line-clamp-2">
                                                 {product.description}
                                             </p>
                                         </div>
@@ -345,8 +345,8 @@ export default function Products() {
                                             ))}
                                         </div>
 
-                                        <div className="pt-4 border-t border-gray-50 flex items-center justify-between">
-                                            <span className="text-xs font-medium text-gray-400">
+                                        <div className="pt-3 lg:pt-4 border-t border-gray-50 flex items-center justify-between">
+                                            <span className="text-[10px] lg:text-xs font-medium text-gray-400">
                                                 ID: {product.id.toString().padStart(4, '0')}
                                             </span>
                                             <Button
@@ -355,7 +355,7 @@ export default function Products() {
                                                     openInquireModal(product);
                                                 }}
                                                 size="sm"
-                                                className="bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-full px-4 text-xs"
+                                                className="bg-[#00A3E0] hover:bg-[#0091c8] text-white rounded-full px-3 lg:px-4 text-[10px] lg:text-xs py-1 lg:py-2"
                                             >
                                                 Inquire
                                             </Button>
