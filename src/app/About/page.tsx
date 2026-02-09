@@ -110,9 +110,7 @@ export default function About() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
-                            <span className="inline-block px-4 py-2 rounded-full bg-[#00A3E0]/10 text-[#00A3E0] text-sm font-medium mb-6">
-                                About IES
-                            </span>
+
 
                             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                                 Engineering Excellence <span className="text-[#00A3E0]">Since 2008</span>
