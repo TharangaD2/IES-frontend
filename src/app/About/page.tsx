@@ -38,28 +38,34 @@ interface MilestoneItem {
 const values: ValueItem[] = [
     {
         icon: Shield,
-        title: 'Quality Assurance',
-        description: 'We never compromise on quality, sourcing only the best products from certified manufacturers.',
+        title: 'Customer Focus',
+        description: 'Delivering reliable products and services that exceed client expectations.',
         color: '#00A3E0'
     },
     {
         icon: Lightbulb,
-        title: 'Innovation',
-        description: 'Staying ahead with the latest technology and engineering solutions in the market.',
+        title: 'Excellence',
+        description: 'Striving for high standards in engineering quality, service delivery, and operational performance.',
         color: '#F5A623'
     },
     {
         icon: Handshake,
-        title: 'Reliability',
-        description: 'Building long-term relationships through consistent service and trustworthiness.',
+        title: 'Innovation',
+        description: 'Continuously improving technologies and engineering practices to provide better solutions.',
         color: '#00D4AA'
     },
     {
         icon: Target,
-        title: 'Excellence',
-        description: 'Striving for excellence in every project, big or small, across all sectors.',
+        title: 'Partnership',
+        description: 'Building long-term relationships with customers, suppliers, and industry partners.',
         color: '#E91E63'
-    }
+    },
+    {
+        icon: Handshake,
+        title: 'Integrity',
+        description: 'Maintaining transparency, professionalism, and ethical standards in all business operations.',
+        color: '#00D4AA'
+    },
 ];
 
 const milestones: MilestoneItem[] = [
@@ -75,6 +81,25 @@ const certifications: string[] = [
     'Fire Safety Standards Compliant',
     'Authorized Distributor Network',
     'Professional Engineering Association Member'
+];
+
+interface TeamMember {
+    name: string;
+    designation: string;
+    description: string;
+}
+
+const teamMembers: TeamMember[] = [
+    {
+        name: 'Abdul Hardi Jabir',
+        designation: 'Director / Chief Business Officer – IES',
+        description: 'Abdul Hardi Jabir is the Director and Chief Business Officer of IES'
+    },
+    {
+        name: 'Danushka Dhaham Mudalige',
+        designation: 'Director – Sales and Marketing - IES',
+        description: 'Danushka Dhaham Kuruppu Mudalige is a dynamic sales and marketing professional with a strong academic background.'
+    }
 ];
 
 // ---------- Component ----------
@@ -179,6 +204,70 @@ export default function About() {
                 </div>
             </section>
 
+            {/* Introduction Section */}
+            <section className="py-16 lg:py-24 bg-gray-50 overflow-hidden">
+                <div className="container mx-auto px-6 lg:px-12">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="relative order-2 lg:order-1"
+                        >
+                            <img 
+                                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" 
+                                alt="IES Engineering Team" 
+                                className="rounded-3xl shadow-2xl object-cover w-full h-[400px] lg:h-[600px]"
+                            />
+                            {/* Decorative background blurs */}
+                            <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-[#00A3E0]/20 rounded-full blur-3xl -z-10" />
+                            <div className="absolute -top-8 -left-8 w-32 h-32 bg-[#F5A623]/20 rounded-full blur-2xl -z-10" />
+                            
+                            {/* Floating Badge */}
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.3 }}
+                                className="absolute bottom-4 left-4 lg:bottom-8 lg:-left-8 bg-white p-6 rounded-2xl shadow-xl max-w-[220px]"
+                            >
+                                <div className="text-4xl font-bold text-[#00A3E0] mb-2">15+</div>
+                                <div className="text-sm text-gray-600 font-medium leading-snug">Years of Engineering Excellence & Trust</div>
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="order-1 lg:order-2"
+                        >
+                            <span className="inline-block px-4 py-2 rounded-full bg-[#00A3E0]/10 text-[#00A3E0] text-sm font-medium mb-6">
+                                About Us
+                            </span>
+                            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0A1628] mb-8 leading-tight">
+                                Infinity Engineering Solutions (Pvt) Ltd
+                            </h2>
+                            
+                            <div className="space-y-6 text-gray-600 text-base lg:text-lg leading-relaxed text-justify lg:text-left">
+                                <p>
+                                    Infinity Engineering Solutions (IES) is a dynamic engineering infrastructure company specializing in mechanical, electrical, and plumbing (MEP) solutions. Established in Sri Lanka, the company provides a comprehensive range of engineering products, services, and solutions to support modern building infrastructure development.
+                                </p>
+                                <p>
+                                    Founded with a vision to deliver professional engineering solutions, IES has grown into a reliable partner for industries requiring high-quality engineering systems and solutions. The company combines technical expertise, strong supplier partnerships, and customer-focused services to deliver efficient and sustainable engineering solutions.
+                                </p>
+                                <p>
+                                    IES focuses on delivering value through quality products, innovative technologies, and  reliable engineering services and solutions.The company continues to support projects across diverse sectors such as commercial, industrial, and construction.
+                                </p>
+                                <p>
+                                    Through continuous innovation and dedication to excellence, IES aims to become a leading MEP solutions provider in the region while maintaining strong relationships across all stakeholders of the industry.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* Mission & Vision */}
             <section className="py-12 lg:py-24 bg-white">
                 <div className="container mx-auto px-4 lg:px-12">
@@ -195,10 +284,11 @@ export default function About() {
                             <h3 className="text-lg lg:text-2xl font-bold text-[#0A1628] mb-3 lg:mb-4">Our Mission</h3>
                             <div>
                                 <p className={`text-gray-600 leading-relaxed text-xs lg:text-base ${!missionExpanded ? 'line-clamp-3 lg:line-clamp-none' : ''}`}>
-                                    To provide an unparalleled customer experience by offering quality products and
-                                    customized solutions to meet the specific needs of our clients. We are committed to
-                                    delivering exceptional value through competitive pricing, accessibility, quick
-                                    response times, and certified products.
+                                    Achieve sustainable growth within the MEP engineering industry.
+                                    Create value for customers through innovative solutions, products, and services.
+                                    Develop employee capabilities to create a high-performing organization.
+                                    Continuously improve technologies and operational processes.
+                                    Build strong partnerships with stakeholders.
                                 </p>
                                 <button
                                     onClick={() => setMissionExpanded(!missionExpanded)}
@@ -221,10 +311,7 @@ export default function About() {
                             <h3 className="text-lg lg:text-2xl font-bold text-[#0A1628] mb-3 lg:mb-4">Our Vision</h3>
                             <div>
                                 <p className={`text-gray-600 leading-relaxed text-xs lg:text-base ${!visionExpanded ? 'line-clamp-3 lg:line-clamp-none' : ''}`}>
-                                    To be the leading engineering solutions provider in Sri Lanka, recognized for
-                                    innovation, reliability, and excellence. We aim to expand our reach while maintaining
-                                    the highest standards of quality and customer satisfaction that have defined our
-                                    success.
+                                    To become the most customer-focused and trusted engineering solutions provider in the Asian region, delivering innovative engineering solutions that meet customer needs at the right time, with the right quality and while being socially responsible.
                                 </p>
                                 <button
                                     onClick={() => setVisionExpanded(!visionExpanded)}
@@ -255,7 +342,7 @@ export default function About() {
                         </h2>
                     </motion.div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+                    <div className="flex flex-wrap justify-center gap-4 lg:gap-8">
                         {values.map((value, index) => (
                             <motion.div
                                 key={index}
@@ -264,7 +351,7 @@ export default function About() {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -5 }}
-                                className="p-4 lg:p-8 rounded-2xl lg:rounded-3xl bg-white shadow-sm hover:shadow-xl transition-all"
+                                className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] p-4 lg:p-8 rounded-2xl lg:rounded-3xl bg-white shadow-sm hover:shadow-xl transition-all"
                             >
                                 <div
                                     className="w-10 h-10 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl flex items-center justify-center mb-3 lg:mb-6"
@@ -384,6 +471,56 @@ export default function About() {
                                 <div className="text-white/80">Customer Satisfaction Rate</div>
                             </div>
                         </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Management Team */}
+            <section className="py-24 bg-[#0A1628]">
+                <div className="container mx-auto px-6 lg:px-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center max-w-3xl mx-auto mb-16"
+                    >
+                        <span className="inline-block px-4 py-2 rounded-full bg-[#00A3E0]/10 text-[#00A3E0] text-sm font-medium mb-6">
+                            Leadership
+                        </span>
+                        <h2 className="text-4xl font-bold text-white mb-6">
+                            Our Management Team
+                        </h2>
+                        <p className="text-gray-400 text-lg">
+                            Guided by experienced leaders committed to engineering excellence and innovation.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        {teamMembers.map((member, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.2 }}
+                                className="group relative bg-[#0F223D] border border-white/10 rounded-3xl overflow-hidden hover:border-[#00A3E0]/50 transition-all duration-300 flex flex-col h-full shadow-lg hover:shadow-[#00A3E0]/10"
+                            >
+                                {/* Decorative top border */}
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00A3E0] to-[#00D4AA] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                <div className="p-8 sm:p-10 flex flex-col flex-1">
+                                    <div className="w-16 h-16 rounded-2xl bg-[#00A3E0]/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                                        <Users className="w-8 h-8 text-[#00A3E0]" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
+                                    <p className="text-[#00D4AA] font-medium mb-6 text-sm tracking-wide uppercase">{member.designation}</p>
+                                    <div className="w-12 h-px bg-white/20 mb-6" />
+                                    <p className="text-gray-400 leading-relaxed text-sm sm:text-base flex-1">
+                                        {member.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>

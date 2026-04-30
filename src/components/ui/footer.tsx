@@ -162,27 +162,27 @@ const Footer: React.FC = () => {
                                         <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-[#0084CA] mt-0.5" />
                                         <div className="text-xs lg:text-base">
                                             <div>+94 77 755 4994</div>
-                                            <div>+94 11 271 0458</div>
+                                            <div>+94 77 755 4668</div>
                                         </div>
                                     </a>
                                 </li>
 
                                 <li>
                                     <a
-                                        href="mailto:Info@ies.lk"
+                                        href="mailto:sales@ies.lk"
                                         className="flex items-center gap-2 lg:gap-3 text-gray-400 hover:text-white transition-colors text-xs lg:text-base"
                                     >
                                         <Mail className="w-4 h-4 lg:w-5 lg:h-5 text-[#0084CA]" />
-                                        Info@ies.lk
+                                        sales@ies.lk
                                     </a>
                                 </li>
 
                                 <li className="flex items-start gap-2 lg:gap-3 text-gray-400 text-xs lg:text-base">
                                     <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-[#0084CA] mt-0.5" />
                                     <div>
-                                        118G, Abeysekara Road,
+                                        116/6, Thimbirigasyaya Road,
                                         <br />
-                                        Dehiwala, Sri Lanka
+                                        Colombo 05, Sri Lanka
                                     </div>
                                 </li>
                             </ul>

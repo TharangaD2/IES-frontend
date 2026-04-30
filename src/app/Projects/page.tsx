@@ -12,6 +12,12 @@ import {
     ChevronRight,
     X,
     Link,
+    Factory,
+    Zap,
+    Wifi,
+    Home,
+    Train,
+    Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -403,6 +409,54 @@ export default function Projects() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Industries Section */}
+            <section className="py-24 bg-white">
+                <div className="container mx-auto px-6 lg:px-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center max-w-3xl mx-auto mb-16"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#0A1628] mb-6">
+                            Industries and Clients We Serve
+                        </h2>
+                        <p className="text-gray-600 text-lg">
+                            Infinity Engineering Solutions supports projects across a wide range of industries including:
+                        </p>
+                    </motion.div>
+
+                    <div className="flex flex-wrap justify-center gap-6">
+                        {[
+                            { name: "Building Construction", icon: Building2 },
+                            { name: "Industrial Infrastructure", icon: Factory },
+                            { name: "Energy and Renewable Energy", icon: Zap },
+                            { name: "Telecommunication", icon: Wifi },
+                            { name: "Residential and Commercial Development", icon: Home },
+                            { name: "Railway and Transportation", icon: Train },
+                            { name: "Utility Infrastructure", icon: Settings },
+                        ].map((industry, index) => {
+                            const Icon = industry.icon;
+                            return (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="flex-1 min-w-[200px] max-w-[280px] p-6 rounded-2xl bg-gray-50 border hover:bg-white hover:shadow-xl hover:border-[#00A3E0]/30 transition-all group flex flex-col items-center text-center"
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-[#00A3E0]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <Icon className="w-8 h-8 text-[#00A3E0]" />
+                                    </div>
+                                    <h3 className="font-bold text-[#0A1628]">{industry.name}</h3>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
 
             {/* Stats Section */}
             <section className="py-16 bg-[#0A1628]">

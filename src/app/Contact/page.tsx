@@ -51,23 +51,30 @@ const contactInfo: ContactCard[] = [
     {
         icon: Phone,
         title: 'Call Us',
-        details: ['+94 77 755 4994', '+94 11 271 0458'],
+        details: ['+94 77 755 4994', '+94 777 554 668'],
         color: '#00A3E0',
         action: 'tel:+94777554994'
     },
     {
         icon: Mail,
         title: 'Email Us',
-        details: ['Info@ies.lk'],
+        details: ['sales@ies.lk'],
         color: '#F5A623',
-        action: 'mailto:Info@ies.lk'
+        action: 'mailto:sales@ies.lk'
     },
     {
         icon: MapPin,
-        title: 'Visit Us',
-        details: ['118G, Abeysekara Road', 'Dehiwala, Sri Lanka'],
+        title: 'Head Office',
+        details: ['116/6, Thimbirigasyaya Road', 'Colombo 05, Sri Lanka'],
         color: '#00D4AA',
-        action: 'https://maps.google.com/?q=118G,Abeysekara+Road,Dehiwala,Sri+Lanka'
+        action: 'https://maps.google.com/?q=116/6,Thimbirigasyaya+Road,Colombo+05,Sri+Lanka'
+    },
+    {
+        icon: MapPin,
+        title: 'Registered Address',
+        details: ['4B, Malwatta Cross Lane', 'Dehiwala, Sri Lanka'],
+        color: '#9B59B6',
+        action: 'https://maps.google.com/?q=4B,Malwatta+Cross+Lane,Dehiwala,Sri+Lanka'
     },
     {
         icon: Clock,
@@ -169,7 +176,7 @@ export default function Contact() {
             {/* Contact Info Cards */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-6 lg:px-12">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 -mt-24 relative z-10">
+                    <div className="flex flex-wrap justify-center gap-4 lg:gap-6 -mt-24 relative z-10">
                         {contactInfo.map((info, index) => {
                             const Icon = info.icon;
 
@@ -182,7 +189,7 @@ export default function Contact() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
                                     whileHover={{ y: -5, scale: 1.02 }}
-                                    className="p-6 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all group cursor-pointer"
+                                    className="flex-1 min-w-[220px] max-w-[280px] p-6 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all group cursor-pointer"
                                 >
                                     <div
                                         className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
