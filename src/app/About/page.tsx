@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     Shield,
     Award,
@@ -87,18 +87,49 @@ interface TeamMember {
     name: string;
     designation: string;
     description: string;
+    fullDetails?: React.ReactNode;
 }
 
 const teamMembers: TeamMember[] = [
     {
         name: 'Abdul Hardi Jabir',
         designation: 'Director / Chief Business Officer – IES',
-        description: 'Abdul Hardi Jabir is the Director and Chief Business Officer of IES'
+        description: 'Abdul Hardi Jabir is the Director and Chief Business Officer of IES',
+        fullDetails: (
+            <div className="text-gray-300 text-sm space-y-4">
+                <p className="text-[#00D4AA] font-semibold text-xs leading-relaxed">
+                    DBA,(Reading), MBA, PGDBM, CIM, SLIM, Dip. In Electronics (C&G), NCIT
+                </p>
+                <p>Abdul Hardi Jabir is the Director and Chief Business Officer of IES, bringing over 20 years of experience in power generation and distribution, lightning protection, earthing, and electrical infrastructure. He has held key positions in both local and international multinational organizations in Sri Lanka, contributing extensive industry expertise and strategic leadership.</p>
+                <p>Under his guidance, IES has established strong partnerships with leading global brands, enabling the delivery of reliable, high-performance products and engineering solutions. He is committed to upholding quality, technical excellence, and long-term value for clients.</p>
+                <p>Hardi Jabir, holds multiple academic and professional qualifications in Engineering, Business Management, and Marketing from universities locally and internationally, and is currently pursuing a Doctor of Business Administration (DBA) at Asia e University (AeU), Malaysia.</p>
+                <p>A successful marketer with over 20 years of experience & proven reputation in Switchgear & Automation products, Industrial Diesel Engine Generators, Cable Management Systems, Lightning Protection & Loss preventive solutions.</p>
+                <p>Experienced & Knowledgeable in both Electrical & Mechanical Engineering along with strategic management skills.</p>
+                <p>Dynamic, energetic, visionary & team-oriented professional that successfully contributed towards organizational growth.</p>
+                <div className="bg-white/5 p-4 rounded-xl border border-white/10 mt-4">
+                    <h4 className="text-white font-semibold mb-3 text-sm">Professional Academic Summary</h4>
+                    <ul className="space-y-2 text-xs text-gray-400">
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Doctor of Business Administration (DBA) – Reading, Asia e University – Malaysia – 2021 - 2026</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Postgraduate Diploma in Professional Marketing (DipM) – Chartered Institute of Marketing (CIM - UK) – 2019 / 2020</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Master of Business Administration in Marketing (MBA) – Cardiff Metropolitan University – UK – 2018 / 2019</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Postgraduate Diploma in Business Management (PGDBM) – University of Colombo – 2016 / 2017</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Postgraduate Diploma in Marketing – Sri Lanka Institute of Marketing (SLIM) - 2007 / 2008</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>Diploma in Electronics – City & Guilds Syllabus – Technical Educational Institute -Colombo 2002 / 2003</span></li>
+                        <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#00A3E0] shrink-0 mt-0.5" /><span>National Certificate for Industrial Technicians (NCIT) – Technical College – Ratmalana – 2000 / 2001</span></li>
+                    </ul>
+                </div>
+            </div>
+        )
     },
     {
         name: 'Danushka Dhaham Mudalige',
         designation: 'Director – Sales and Marketing - IES',
-        description: 'Danushka Dhaham Kuruppu Mudalige is a dynamic sales and marketing professional with a strong academic background.'
+        description: 'Danushka Dhaham Kuruppu Mudalige is a dynamic sales and marketing professional with a strong academic background.',
+        fullDetails: (
+            <div className="text-gray-300 text-sm space-y-4">
+                <p>Danushka Dhaham Kuruppu Mudalige is a dynamic sales and marketing professional with a strong academic background. He holds an MBA in General from Asia e University, equipping him with strategic and commercial expertise to drive business growth, strengthen client relationships, and deliver high-quality, customer-focused solutions aligned with industry standards.</p>
+            </div>
+        )
     }
 ];
 
@@ -106,6 +137,7 @@ const teamMembers: TeamMember[] = [
 export default function About() {
     const [missionExpanded, setMissionExpanded] = useState(false)
     const [visionExpanded, setVisionExpanded] = useState(false)
+    const [popupMember, setPopupMember] = useState<number | null>(null)
 
     return (
         <div className="min-h-screen">
@@ -503,7 +535,9 @@ export default function About() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.2 }}
-                                className="group relative bg-[#0F223D] border border-white/10 rounded-3xl overflow-hidden hover:border-[#00A3E0]/50 transition-all duration-300 flex flex-col h-full shadow-lg hover:shadow-[#00A3E0]/10"
+                                onMouseEnter={() => member.fullDetails && setPopupMember(index)}
+                                onClick={() => member.fullDetails && setPopupMember(index)}
+                                className="group relative bg-[#0F223D] border border-white/10 rounded-3xl overflow-hidden hover:border-[#00A3E0]/50 transition-all duration-300 flex flex-col h-full shadow-lg hover:shadow-[#00A3E0]/10 cursor-pointer"
                             >
                                 {/* Decorative top border */}
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00A3E0] to-[#00D4AA] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -522,6 +556,46 @@ export default function About() {
                             </motion.div>
                         ))}
                     </div>
+
+                    <AnimatePresence>
+                        {popupMember !== null && teamMembers[popupMember].fullDetails && (
+                            <motion.div
+                                className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                <div 
+                                    className="absolute inset-0 bg-[#0A1628]/60 backdrop-blur-md cursor-pointer"
+                                    onClick={() => setPopupMember(null)}
+                                />
+                                <motion.div
+                                    className="relative bg-[#0F223D] border border-white/10 rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-y-auto p-8 shadow-2xl z-10 scrollbar-thin scrollbar-thumb-[#00A3E0]"
+                                    initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                                    exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                                    onMouseLeave={() => setPopupMember(null)}
+                                >
+                                    <div className="flex items-center gap-4 mb-8 pb-6 border-b border-white/10">
+                                        <div className="w-16 h-16 rounded-2xl bg-[#00A3E0]/10 flex items-center justify-center shrink-0">
+                                            <Users className="w-8 h-8 text-[#00A3E0]" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-white mb-1">{teamMembers[popupMember].name}</h3>
+                                            <p className="text-[#00A3E0] font-medium text-sm tracking-wide uppercase">{teamMembers[popupMember].designation}</p>
+                                        </div>
+                                        <button 
+                                            onClick={() => setPopupMember(null)}
+                                            className="ml-auto w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                    {teamMembers[popupMember].fullDetails}
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
 
